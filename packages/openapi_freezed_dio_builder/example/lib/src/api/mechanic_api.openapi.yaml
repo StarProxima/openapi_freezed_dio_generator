@@ -1,0 +1,2452 @@
+openapi: 3.0.1
+info:
+  title: Mehanik
+  description: Приложение Механик
+  contact:
+    name: Матвей Акулов
+    email: akulov-gosha@mail.ru
+  version: '1.0'
+servers:
+  - url: https://realty.neirodev.ru/mehanik
+    description: Mehanik API
+paths:
+  /users:
+    put:
+      tags:
+        - user-controller
+      summary: Обновление нескольких полей пользователя(обновятся все, которые не null у входящего объекта)
+      operationId: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Пользователь с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /users/field:
+    put:
+      tags:
+        - user-controller
+      summary: Обновление одного поля пользователя
+      operationId: update_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetFieldRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Пользователь с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Поле не изменено из-за ошибки
+          content:
+            '*/*':
+              schema:
+                type: object
+  /serviceAnnouncements/{id}:
+    get:
+      tags:
+        - service-announcement-controller
+      summary: Получение объявления по id
+      operationId: getById_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAnnouncementEntity'
+        '404':
+          description: Объявление с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - service-announcement-controller
+      summary: Обновление нескольких полей объявления(обновятся все, которые не null у входящего объекта)
+      description: хуй
+      operationId: update_2
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор объявления
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAnnouncementEntity'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - service-announcement-controller
+      summary: Удаление объявления(если текущий пользователь создавал его. Все фотки, марки и типы ТС удалятся автоматически)
+      operationId: deleteById_1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /serviceAnnouncements/field:
+    put:
+      tags:
+        - service-announcement-controller
+      summary: Обновление одного поля
+      description: хуй
+      operationId: update_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetFieldRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Поле не изменено из-за ошибки
+          content:
+            '*/*':
+              schema:
+                type: object
+  /partTypes/{id}:
+    get:
+      tags:
+        - part-type-controller
+      summary: Получить части транспорта по id
+      operationId: getById_2
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+    put:
+      tags:
+        - part-type-controller
+      summary: Обновить часть транспорта
+      operationId: updateById
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartTypeRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartType'
+  /partAnnouncements:
+    get:
+      tags:
+        - part-announcement-controller
+      summary: Список объявлений о продаже с фильтрацией
+      operationId: getAllDTO_2
+      parameters:
+        - name: userLatitude
+          in: query
+          description: Широта пользователя(обязателен, если нужна фильтрация по радиусу)
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: userLongitude
+          in: query
+          description: Долгота пользователя(обязателен, если нужна фильтрация по радиусу)
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: radius
+          in: query
+          description: Радиус поиска
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: city
+          in: query
+          description: Город, который в приоритете (не передавать, если не нужен приоритет)
+          required: false
+          schema:
+            type: string
+        - name: types
+          in: query
+          description: Типы ТС
+          required: false
+          schema:
+            type: string
+        - name: brandsString
+          in: query
+          description: Марки
+          required: false
+          schema:
+            type: string
+        - name: nameOfPart
+          in: query
+          description: Название запчасти
+          required: false
+          schema:
+            type: string
+        - name: startPrice
+          in: query
+          description: Начальная цена
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: endPrice
+          in: query
+          description: Конечная цена
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: condition
+          in: query
+          description: Состояние, если неважно, то не передавай
+          required: false
+          schema:
+            type: boolean
+        - name: isCompany
+          in: query
+          description: Кто продает, если неважно, то не передавай
+          required: false
+          schema:
+            type: boolean
+        - name: original
+          in: query
+          description: Оригинальность, если неважно, то не передавай
+          required: false
+          schema:
+            type: boolean
+        - name: year
+          in: query
+          description: Год, если неважно, то не передавай
+          required: false
+          schema:
+            type: string
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sortFields
+          in: query
+          description: Поля для сортировки через запятую (по умолчанию сортирует по дате размещения)
+          required: false
+          schema:
+            type: string
+        - name: sortDirection
+          in: query
+          description: Порядок сортировки (default ASC)
+          required: false
+          schema:
+            type: string
+            default: ASC
+            enum:
+              - ASC
+              - DESC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementResponseDTO'
+    put:
+      tags:
+        - part-announcement-controller
+      summary: Обновление объявления
+      description: хуй
+      operationId: update_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartAnnouncementRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementEntity'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementEntity'
+    post:
+      tags:
+        - part-announcement-controller
+      summary: Создание объявления
+      description: хуй
+      operationId: save_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartAnnouncementRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementEntity'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementEntity'
+  /users/{id}/rating:
+    get:
+      tags:
+        - user-controller
+      summary: Получение рейтинга пользователя по id
+      operationId: getRatingById
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор пользователя
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+        '404':
+          description: Пользователь с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+    post:
+      tags:
+        - user-controller
+      summary: Добавление оценки пользователю
+      operationId: addRatingRow
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор пользователя, которому ставится оценка
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: value
+          in: query
+          description: Оценка
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /serviceAnnouncements:
+    post:
+      tags:
+        - service-announcement-controller
+      summary: Создание обновления объявления
+      description: хуй
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAnnouncementEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /serviceAnnouncementsFavorites/addToFavorites:
+    post:
+      tags:
+        - service-announcement-favorite-controller
+      summary: Добавление сервиса в избранное
+      description: Добавление указанного сервиса в избранное текущего пользователя
+      operationId: addToFavorites
+      parameters:
+        - name: serviceAnnouncementId
+          in: query
+          description: Идентификатор сервиса
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Сервис успешно добавлен в избранное
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Идентификатор сервиса не задан
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: |-
+            * Сервис с таким id не найден 
+            * Уже добавлен в избранное
+          content:
+            '*/*':
+              schema:
+                type: object
+  /partAnnouncements/{id}/archive:
+    post:
+      tags:
+        - part-announcement-controller
+      summary: Архивирование / разархивирование объявления(если текущий пользователь создавал его)
+      operationId: addToArchive
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+  /partAnnouncementFavorites:
+    get:
+      tags:
+        - part-announcement-favorite-controller
+      summary: Список объявлений о продаже в избранном у текущего пользователя(только авторизованного)
+      operationId: getAllDTO_4
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartAnnouncementResponseDTO'
+    post:
+      tags:
+        - part-announcement-favorite-controller
+      summary: Добавление объявления о продаже в избранное текущим пользователем(авторизованным)
+      operationId: save_2
+      parameters:
+        - name: partAnnouncementId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - part-announcement-favorite-controller
+      summary: Удаление объявления о продаже из избранного текущим пользователем(авторизованным)
+      operationId: deleteById_3
+      parameters:
+        - name: partAnnouncementId
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /cars:
+    get:
+      tags:
+        - car-controller
+      summary: Список список машин у текущего пользователя
+      operationId: getAll_2
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarEntity'
+    post:
+      tags:
+        - car-controller
+      summary: Добавление машины в гараж
+      operationId: save_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarEntity'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /auth/register:
+    post:
+      tags:
+        - auth-controller
+      summary: Отправка смс пользователю
+      description: Метод для отправки смс пользователю
+      operationId: register
+      parameters:
+        - name: phone
+          in: query
+          description: Номер телефона
+          required: true
+          schema:
+            type: string
+        - name: secret
+          in: query
+          description: Секретный ключ
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Смс успешно отправлена
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Неверные данные
+          content:
+            '*/*':
+              schema:
+                type: object
+  /auth/refresh:
+    post:
+      tags:
+        - auth-controller
+      summary: Обновление access token
+      description: Метод получения нового access token для указанного refresh token
+      operationId: refresh
+      parameters:
+        - name: refreshToken
+          in: query
+          description: Access токен
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: В случае успешного выполнения запроса, сервер вернёт обновлённую сессию пользователя
+          headers:
+            Set-Cookie:
+              description: 'access_token: access token пользователя'
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json: 
+              schema:
+                type: object
+        '400':
+          description: Refresh token не задан
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Сессия с данным refresh token'ом не найдена
+          content:
+            '*/*':
+              schema:
+                type: object
+  /auth/confirm:
+    post:
+      tags:
+        - auth-controller
+      summary: Подтверждение кода из смс
+      description: Метод для получения подтверждения кода из смс
+      operationId: confirm
+      parameters:
+        - name: phone
+          in: query
+          description: Номер телефона
+          required: true
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: Код подтверждения
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: В случае успешного выполнения запроса, сервер вернёт ответ с кодом 200, cookie с именем access_token в заголовке и сессию пользователя в теле ответа. Access токен имеет срок годности(в минутах) 30 минут. Refresh токен имеет неограниченный срок действия.
+          headers:
+            Set-Cookie:
+              description: 'access_token: access token пользователя'
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '400':
+          description: Неверный код
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Пользователь с таким номером не существует
+          content:
+            '*/*':
+              schema:
+                type: object
+  /users/{id}:
+    get:
+      tags:
+        - user-controller
+      summary: Получение пользователя по id
+      operationId: getById
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор пользователя
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '404':
+          description: Пользователь с таким id не найден
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+    delete:
+      tags:
+        - user-controller
+      summary: Получение пользователя по id
+      operationId: deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор пользователя
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Пользователь с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+  /users/{id}/myRating:
+    get:
+      tags:
+        - user-controller
+      summary: Получение поставленной оценки пользователю с id от текущего пользователя
+      operationId: getRatingRow
+      parameters:
+        - name: id
+          in: path
+          description: Идентификатор пользователя, у которого проверяем поставлена оценка
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Если есть - значение оценки, если нет - -1
+          content:
+            '*/*':
+              schema:
+                type: object
+  /users/me:
+    get:
+      tags:
+        - user-controller
+      summary: Получение данных о текущем пользователе
+      operationId: getCurrent
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /serviceAnnouncementsFavorites:
+    get:
+      tags:
+        - service-announcement-favorite-controller
+      summary: Список сервисов в избранном у текущего пользователя(только авторизованного)
+      operationId: findAllDTO
+      parameters:
+        - name: serviceType
+          in: query
+          description: Тип сервиса
+          required: false
+          schema:
+            type: string
+            enum:
+              - STO
+              - TIRE_FITTING
+              - CAR_WASH
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Все сервисы в избранном у текущего пользователя
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceAnnouncementDTO'
+  /serviceAnnouncements/DTO:
+    get:
+      tags:
+        - service-announcement-controller
+      summary: Список объявлений
+      description: Для поиска по расстоянию параметры userLatitude, userLongitude, radius используются вместе. Если один из них не задан, поиск по расстоянию не пройдет
+      operationId: getAllDTO
+      parameters:
+        - name: userLatitude
+          in: query
+          description: Широта пользователя(обязателен, если нужна фильтрация по радиусу)
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: userLongitude
+          in: query
+          description: Долгота пользователя(обязателен, если нужна фильтрация по радиусу)
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: radius
+          in: query
+          description: хуй
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: city
+          in: query
+          description: Город, который в приоритете (не передавать, если не нужен приоритет)
+          required: false
+          schema:
+            type: string
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: serviceType
+          in: query
+          description: Тип сервиса
+          required: false
+          schema:
+            type: string
+            enum:
+              - STO
+              - TIRE_FITTING
+              - CAR_WASH
+        - name: carTypes
+          in: query
+          description: Тип транспортного средства
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAnnouncementDTO'
+  /serviceAnnouncementCarBrands:
+    get:
+      tags:
+        - service-announcement-car-brand-controller
+      summary: Список марок с пагинацией
+      operationId: getAllDTO_1
+      parameters:
+        - name: brand
+          in: query
+          description: Название (для поиска по названию)
+          required: false
+          schema:
+            type: string
+        - name: types
+          in: query
+          description: Типы ТС
+          required: false
+          schema:
+            type: string
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceAnnouncementCarBrand'
+  /partTypes:
+    get:
+      tags:
+        - part-type-controller
+      summary: Получить все части транспорта
+      operationId: getAll
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+          example: 0
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 100
+          example: 100
+        - name: name
+          in: query
+          description: Название части транспорта
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartType'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartType'
+  /partTypes/findByName:
+    get:
+      tags:
+        - part-type-controller
+      summary: Получить части транспорта по названию
+      operationId: getByName
+      parameters:
+        - name: name
+          in: query
+          description: Название запчасти
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartType'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartType'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartType'
+  /partAnnouncements/{id}:
+    get:
+      tags:
+        - part-announcement-controller
+      summary: Получение объявления по id
+      operationId: getById_3
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementEntity'
+        '404':
+          description: Объявление с таким id не найден
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - part-announcement-controller
+      summary: Удаление объявления(если текущий пользователь создавал его)
+      operationId: deleteById_2
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Объявление с таким id не найдено
+          content:
+            '*/*':
+              schema:
+                type: object
+  /partAnnouncements/part-names:
+    get:
+      tags:
+        - part-announcement-controller
+      summary: Список уникальных названий автозапчастей и их количество по части транспорта
+      operationId: getPartNames
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: typeId
+          in: query
+          description: Id части транспорта
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartNamesAndSizeDTO'
+  /partAnnouncements/me:
+    get:
+      tags:
+        - part-announcement-controller
+      summary: Список объявлений о продаже у текущего пользователя
+      operationId: getAllDTO_3
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы(с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы(с 1)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: archive
+          in: query
+          description: Архивность, если null, то вернутся записи и архивные и нет
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartAnnouncementResponseDTO'
+  /part-names:
+    get:
+      tags:
+        - part-name-controller
+      operationId: getAll_1
+      parameters:
+        - name: pageNum
+          in: query
+          description: Номер страницы (с 0)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pageSize
+          in: query
+          description: Количество выгружаемых элементов
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+        - name: name
+          in: query
+          description: Название запчасти для фильтрации
+          required: false
+          schema:
+            type: string
+        - name: partTypeId
+          in: query
+          description: Идентификатор запчасти для фильтрации
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartName'
+  /newApi/vinDecode:
+    get:
+      tags:
+        - new-api-controller
+      summary: Поиск по vin машину
+      operationId: vinDecode
+      parameters:
+        - name: vin
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinResponseDto'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VinResponseDto'
+  /api/vinDecode:
+    get:
+      tags:
+        - api-controller
+      summary: Поиск по vin машину
+      operationId: vinDecodeShort
+      parameters:
+        - name: vin
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VinDecode'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/partTypes:
+    get:
+      tags:
+        - api-controller
+      description: Список транспортных средств и частей для метода /carParts
+      operationId: partTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - PASSENGER
+                    - COMMERCIAL
+                    - MOTO
+                    - ENGINE
+                    - AXLE
+  /api/modifications:
+    get:
+      tags:
+        - api-controller
+      summary: Список модификаций модели
+      operationId: getModifications
+      parameters:
+        - name: carType
+          in: query
+          description: Тип транспортного средства
+          required: true
+          schema:
+            type: string
+            enum:
+              - PASSENGER
+              - COMMERCIAL
+              - MOTO
+              - AXLE
+        - name: make
+          in: query
+          description: Марка машины(makeId из /makes)
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: model
+          in: query
+          description: Модель машины(modelId из /models
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+               
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/models:
+    get:
+      tags:
+        - api-controller
+      summary: Список моделей машин
+      operationId: getModels
+      parameters:
+        - name: carTypes
+          in: query
+          description: Тип транспортного средства
+          required: true
+          schema:
+            type: string
+        - name: make
+          in: query
+          description: Марка машины
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+  /api/makes:
+    get:
+      tags:
+        - api-controller
+      summary: Список марок машин, производителей осей
+      operationId: getMakes
+      parameters:
+        - name: carTypes
+          in: query
+          description: Тип транспортного средства
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Make'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/Make'
+  /api/carTypes:
+    get:
+      tags:
+        - api-controller
+      description: Список транспортных средств для всех методов, кроме /carParts
+      operationId: carTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - PASSENGER
+                    - COMMERCIAL
+                    - MOTO
+                    - AXLE
+  /api/carParts:
+    get:
+      tags:
+        - api-controller
+      summary: Список запчастей к модели
+      operationId: carPartsList
+      parameters:
+        - name: partType
+          in: query
+          description: Тип транспортного средства
+          required: true
+          schema:
+            type: string
+            enum:
+              - PASSENGER
+              - COMMERCIAL
+              - MOTO
+              - ENGINE
+              - AXLE
+        - name: kid
+          in: query
+          description: Модификация машины(carId из /modifications
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarPart'
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /serviceAnnouncementsFavorites/removeFromFavorites:
+    delete:
+      tags:
+        - service-announcement-favorite-controller
+      summary: Удаление сервиса из избранного
+      description: Удаление указанного сервиса из избранного текущего пользователя
+      operationId: removeFromFavorites
+      parameters:
+        - name: serviceAnnouncementId
+          in: query
+          description: Идентификатор сервиса
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Сервис успешно удален из избранного
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Идентификатор сервиса не задан
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: |-
+            * Сервис с таким id не найден 
+            * Сервис не добавлен в избранное
+          content:
+            '*/*':
+              schema:
+                type: object
+  /cars/{id}:
+    delete:
+      tags:
+        - car-controller
+      summary: Удаление машины из гаража
+      operationId: deleteById_4
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '404':
+          description: Машина с таким id не найдена
+          content:
+            '*/*':
+              schema:
+                type: object
+        '500':
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                type: object
+  /auth/logout:
+    delete:
+      tags:
+        - auth-controller
+      summary: Закрытие пользовательской сессии
+      description: Завершение текущей пользовательской сессии. После выполнения данного запроса текущий api_token удаляется из БД и все последующие запросы с этим токеном будут возвращать код ошибки 403 и сообщение 'Invalid token'
+      operationId: logout
+      responses:
+        '204':
+          description: В случае успешного выполнения запроса, сервер вернёт просроченный cookie с именем access_token и с пустым значением.
+          headers:
+            Set-Cookie:
+              description: 'access_token: пустая просроченная кука для очистки значения на клиенте'
+              style: simple
+              schema:
+                type: string
+          content:
+            '*/*':
+              schema:
+                type: object
+              
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Идентификатор
+          format: int64
+        name:
+          type: string
+          description: Название компании или имя + фамилия человека
+        site:
+          type: string
+          description: Ссылка на сайт
+        phone:
+          type: string
+          description: Номер телефона
+        city:
+          type: string
+          description: Название города
+        email:
+          type: string
+          description: Почта
+        isCompany:
+          type: boolean
+          description: true - компания, false - частное лицо
+        photo:
+          type: string
+          description: Идентфикатор фотографии, сохраненной в репозитории
+      description: Транспортный обьект пользователя
+    SetFieldRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Идентификатор изменяемого обьекта
+          format: int64
+        fieldName:
+          type: string
+          description: Название поля
+        fieldValue:
+          type: object
+          description: Новое значение поля
+      description: Объект для изменения одного простого поля(примитивного) у любого объекта
+    ServiceAnnouncementEntity:
+      required:
+        - address
+        - companyName
+        - latitude
+        - longitude
+        - service
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        service:
+          type: string
+          description: Тип сервиса
+          enum:
+            - STO
+            - TIRE_FITTING
+            - CAR_WASH
+        companyName:
+          type: string
+          description: Название сервиса
+        description:
+          type: string
+          description: Описание
+        address:
+          type: string
+          description: Полный адрес
+        latitude:
+          type: number
+          description: Широта
+          format: double
+        longitude:
+          type: number
+          description: Долгота
+          format: double
+        rating:
+          type: number
+          description: Рейтинг
+          format: double
+        carTypes:
+          uniqueItems: true
+          type: array
+          description: Типы ТС
+          items:
+            type: string
+            description: Типы ТС
+        brands:
+          uniqueItems: true
+          type: array
+          description: Марки ТС
+          items:
+            type: string
+            description: Марки ТС
+        photos:
+          type: array
+          description: Фотки
+          items:
+            type: string
+            description: Фотки
+        ownerId:
+          type: integer
+          description: Владелец объявления
+          format: int64
+          readOnly: true
+        isFavorite:
+          type: boolean
+          description: В избранном у текущего пользователя
+          readOnly: true
+        phone:
+          maxLength: 20
+          type: string
+          description: Телефон контактного лица
+        mail:
+          maxLength: 100
+          type: string
+          description: Электронная почта контактного лица
+        whatsapp:
+          maxLength: 30
+          type: string
+          description: Whatsapp контактного лица
+      description: Избранное объявление о продаже
+    PartTypeRequestDTO:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Название запчасти
+      description: Тело запроса
+    PartType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        name:
+          type: string
+          description: Название части транспорта
+        quantity:
+          type: integer
+          format: int32
+      description: Часть транспорта
+    PartAnnouncementRequestDTO:
+      required:
+        - brand
+        - condition
+        - model
+        - nameOfPart
+        - numberOfPart
+        - original
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Идентификатор запчасти
+          format: int64
+        type:
+          type: string
+          description: Тип ТС
+          enum:
+            - PASSENGER
+            - COMMERCIAL
+            - MOTO
+            - AXLE
+        brand:
+          type: string
+          description: Марка
+        model:
+          type: string
+          description: Модель
+        year:
+          type: string
+          description: Год
+        nameOfPart:
+          type: string
+          description: Название запчасти
+        numberOfPart:
+          type: string
+          description: Номер запчасти
+        condition:
+          type: boolean
+          description: 'Состояние: true - новая'
+        original:
+          type: boolean
+          description: true - ориг
+        description:
+          type: string
+          description: Описание
+        price:
+          type: integer
+          description: Цена
+          format: int32
+        address:
+          type: string
+          description: Адрес
+        city:
+          type: string
+          description: Город
+        longitude:
+          type: number
+          description: Долгота
+          format: double
+        latitude:
+          type: number
+          description: Широта
+          format: double
+        photos:
+          type: array
+          description: Фото
+          items:
+            type: string
+            description: Фото
+        useEmail:
+          type: boolean
+          description: true - разрешить писать на почту
+          default: false
+        usePhone:
+          type: boolean
+          description: true - разрешить звонить / писать на мобилу
+          default: false
+        useWhatsapp:
+          type: boolean
+          description: true - разрешить звонить / писать на вотсап
+          default: false
+        phone:
+          maxLength: 20
+          type: string
+          description: Телефон продавца
+        mail:
+          maxLength: 100
+          type: string
+          description: Электронная почта продавца
+        whatsapp:
+          maxLength: 30
+          type: string
+          description: Whatsapp продавца
+        archive:
+          type: boolean
+          description: Опубликовать заново, когда закончится срок размещения
+          default: false
+        typeId:
+          type: integer
+          description: Id части транспорта
+          format: int64
+        isCompany:
+          type: boolean
+          description: true - компания, иначе - физлицо
+          default: false
+      description: Добавление новой запчасти (создание объявления)
+    PartAnnouncementEntity:
+      required:
+        - brand
+        - condition
+        - model
+        - numberOfPart
+        - original
+        - ownerId
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Идентификатор названия запчасти
+          format: int64
+        type:
+          type: string
+          description: Тип ТС
+          enum:
+            - PASSENGER
+            - COMMERCIAL
+            - MOTO
+            - AXLE
+        brand:
+          type: string
+          description: Марка
+        model:
+          type: string
+          description: Модель
+        year:
+          type: string
+          description: Год
+        numberOfPart:
+          type: string
+          description: Номер запчасти
+        condition:
+          type: boolean
+          description: 'Состояние: true - новая'
+        original:
+          type: boolean
+          description: true - ориг
+        description:
+          type: string
+          description: Описание
+        price:
+          type: integer
+          description: Цена
+          format: int32
+        address:
+          type: string
+          description: Адрес
+        city:
+          type: string
+          description: Город
+        longitude:
+          type: number
+          description: Долгота
+          format: double
+        latitude:
+          type: number
+          description: Широта
+          format: double
+        isCompany:
+          type: boolean
+          description: true - компания, иначе - физлицо
+        photos:
+          type: array
+          description: Фотки
+          items:
+            type: string
+            description: Фотки
+        dateCreate:
+          type: string
+          description: Дата размещения
+          format: date-time
+          readOnly: true
+        useEmail:
+          type: boolean
+          description: true - разрешить писать на почту
+          default: false
+        usePhone:
+          type: boolean
+          description: true - разрешить звонить / писать на мобилу
+          default: false
+        useWhatsapp:
+          type: boolean
+          description: true - разрешить звонить / писать на вотсап
+          default: false
+        phone:
+          maxLength: 20
+          type: string
+          description: Телефон продавца
+        mail:
+          maxLength: 100
+          type: string
+          description: Электронная почта продавца
+        whatsapp:
+          maxLength: 30
+          type: string
+          description: Whatsapp продавца
+        archive:
+          type: boolean
+          description: Архивность
+          default: false
+        ownerId:
+          type: integer
+          description: Владелец объявления
+          format: int64
+          readOnly: true
+        isFavorite:
+          type: boolean
+          description: В избранном текущего пользователя
+          readOnly: true
+        partType:
+          $ref: '#/components/schemas/PartType'
+        nameOfPart:
+          type: string
+          description: Название запчасти
+      description: Объявление о продаже запчасти
+    PartName:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Идентификатор названия запчасти
+          format: int64
+        nameOfPart:
+          type: string
+          description: Название запчасти
+      description: Модель названия запчасти
+    CarEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        vin:
+          type: string
+          description: VIN-код
+        type:
+          type: string
+          description: Тип
+          enum:
+            - PASSENGER
+            - COMMERCIAL
+            - MOTO
+            - AXLE
+        brand:
+          type: string
+          description: Марка
+        model:
+          type: string
+          description: Модель
+        release:
+          type: string
+          description: Года выпуска
+        photo:
+          type: string
+          description: Фото
+        userId:
+          type: integer
+          description: id владельца
+          format: int64
+          readOnly: true
+      description: ТС
+    Session:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        userId:
+          type: integer
+          format: int64
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        lastLogin:
+          type: string
+          format: date-time
+        useragent:
+          type: string
+        userIp:
+          type: string
+        isRegistered:
+          type: boolean
+      description: Сессия пользователя
+    Role:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        name:
+          type: string
+          description: Название
+      description: Роль
+    UserEntity:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        name:
+          type: string
+          description: Название компании или имя + фамилия человека
+        site:
+          type: string
+          description: Ссылка на сайт
+        phone:
+          type: string
+          description: Номер телефона
+        city:
+          type: string
+          description: Название города
+        email:
+          type: string
+          description: Почта
+        rating:
+          type: number
+          description: Рейтинг
+          format: double
+          readOnly: true
+          default: 0
+        isCompany:
+          type: boolean
+          description: true - компания, false - частное лицо
+        photo:
+          type: string
+          description: Идентификатор фотографии, сохраненной в репозитории
+        role:
+          $ref: '#/components/schemas/Role'
+        createdDate:
+          type: string
+          description: Дата и время создания профиля
+          format: date
+          readOnly: true
+        announcementsQuantity:
+          type: integer
+          format: int32
+      description: Пользователь
+    ServiceAnnouncementDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        companyName:
+          type: string
+          description: Название сервиса
+        address:
+          type: string
+          description: Полный адрес
+        rating:
+          type: number
+          description: Рейтинг
+          format: double
+        latitude:
+          type: number
+          description: Широта
+          format: double
+        longitude:
+          type: number
+          description: Долгота
+          format: double
+        photos:
+          uniqueItems: true
+          type: array
+          description: Фотки
+          items:
+            type: string
+            description: Фотки
+        isFavorite:
+          type: boolean
+          description: В избранном у текущего пользователя
+      description: Запчасть к модификации машины
+    ServiceAnnouncementCarBrand:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Уникальный идентификатор записи
+          format: int64
+          readOnly: true
+        serviceAnnouncementId:
+          type: integer
+          description: id объявления
+          format: int64
+        brand:
+          type: string
+          description: Название марки
+        type:
+          type: string
+          description: Тип ТС
+          enum:
+            - PASSENGER
+            - COMMERCIAL
+            - MOTO
+            - AXLE
+      description: Марки автомобилей
+    PartAnnouncementResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id
+          format: int64
+        type:
+          type: string
+          description: Тип ТС
+          enum:
+            - PASSENGER
+            - COMMERCIAL
+            - MOTO
+            - AXLE
+        brand:
+          type: string
+          description: Марка
+        model:
+          type: string
+          description: Модель
+        year:
+          type: string
+          description: Год
+        nameOfPart:
+          type: string
+          description: Название запчасти
+        numberOfPart:
+          type: string
+          description: Номер запчасти
+        city:
+          type: string
+          description: Название города
+        photos:
+          type: array
+          description: Фото
+          items:
+            type: string
+            description: Фото
+        address:
+          type: string
+          description: Адрес
+        price:
+          type: integer
+          description: Цена
+          format: int32
+        dateCreate:
+          type: string
+          description: Дата размещения
+          format: date-time
+          readOnly: true
+        archive:
+          type: boolean
+          description: Архивность
+        latitude:
+          type: number
+          description: Широта
+          format: double
+        longitude:
+          type: number
+          description: Долгота
+          format: double
+        isFavorite:
+          type: boolean
+          description: Находится в избранном текущего пользователя
+        partType:
+          $ref: '#/components/schemas/PartType'
+        phone:
+          maxLength: 20
+          type: string
+          description: Телефон продавца
+        mail:
+          maxLength: 100
+          type: string
+          description: Электронная почта продавца
+        whatsapp:
+          maxLength: 30
+          type: string
+          description: Whatsapp продавца
+      description: Запчасть к модификации машины
+    PartNamesAndSizeDTO:
+      type: object
+      properties:
+        nameOfPart:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+    VinResponseDto:
+      type: object
+      properties:
+        vin:
+          type: string
+        model:
+          type: string
+        brand:
+          type: string
+        generation:
+          type: string
+        bodyName:
+          type: string
+        modelYear:
+          type: integer
+          format: int32
+    VinDecode:
+      type: object
+      properties:
+        carId:
+          type: integer
+          description: id модификации
+          format: int64
+        linkageTargetType:
+          type: string
+          description: Тип ТС (сокращенный)
+        manuId:
+          type: integer
+          description: id марки
+          format: int64
+        modId:
+          type: integer
+          description: id модели
+          format: int64
+      description: Расшифровка VIN
+    Car:
+      type: object
+      properties:
+        carId:
+          type: integer
+          description: id
+          format: int64
+        modelid:
+          type: integer
+          description: id модели
+          format: int64
+        name:
+          type: string
+          description: Название
+        constructioninterval:
+          type: string
+          description: Дата выпуска (от - до)
+      description: Модификация модели
+    Model:
+      type: object
+      properties:
+        modelId:
+          type: integer
+          description: id
+          format: int64
+        modelName:
+          type: string
+          description: Название
+      description: Модель машины
+    Make:
+      type: object
+      properties:
+        makeId:
+          type: integer
+          description: id
+          format: int64
+        makeName:
+          type: string
+          description: Название
+      description: Автопроизводитель
+    CarPart:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Название запчасти
+        parts:
+          type: array
+          description: Ее варианты
+          items:
+            $ref: '#/components/schemas/Part'
+      description: Запчасть к модификации машины
+    Part:
+      type: object
+      properties:
+        brand:
+          type: string
+          description: Фирма
+        code:
+          type: string
+          description: Код
+      description: Запчасть

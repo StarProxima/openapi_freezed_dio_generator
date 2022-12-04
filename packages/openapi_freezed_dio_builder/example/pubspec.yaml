@@ -1,0 +1,27 @@
+name: openapi_code_builder_example
+description: Example use of openapi code builder.
+# version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  freezed: any
+  json_annotation: ^4.0.1
+  logging: ^1.0.0
+  logging_appenders: ^1.0.0
+  openapi_base:
+    path: ../../openapi_base
+
+dev_dependencies:
+  openapi_freezed_dio_builder:
+    path: ../
+  json_serializable: ^4.1.0
+  build_runner: ^2.0.6
+  pedantic: ^1.11.0
+
+dependency_overrides:
+  openapi_base:
+    path: ../../openapi_base
+

@@ -1,0 +1,9 @@
+builders:
+  openapi_freezed_dio_builder:
+    import: 'package:openapi_freezed_dio_builder/openapi_freezed_dio_builder.dart'
+    builder_factories: ['openapiCodeBuilder']
+    build_extensions: { '.openapi.yaml': ['.openapi.dart'] }
+    auto_apply: all_packages
+    build_to: source
+    applies_builders: ['freezed', json_serializable]
+    runs_before: ['freezed', 'json_serializable']
