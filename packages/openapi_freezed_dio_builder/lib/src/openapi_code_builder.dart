@@ -128,8 +128,7 @@ class OpenApiLibraryGenerator {
               for (final response in operation.value!.responses!.entries) {
                 final clientResponseParseParams = <Expression>[];
                 final contentMap = response.value!.content ?? {};
-                final content =
-                    contentMap[mediaTypeJson.contentType] ?? contentMap['*/*'];
+                final content = contentMap[mediaTypeJson.contentType];
 //              OpenApiContentType responseContentType;
                 Reference? bodyType;
                 if (content != null) {
@@ -158,6 +157,22 @@ class OpenApiLibraryGenerator {
                     final responseContent =
                         response.value!.content!.entries.first;
 
+                    if (contentMap['*/*']?.schema?.type == APIType.array) {
+                      final name = contentMap['*/*']!
+                              .schema!
+                              .items!
+                              .referenceURI
+                              ?.pathSegments
+                              .last ??
+                          responseClass.name!;
+
+                      bodyType = _referType('List', generics: [
+                        _schemaReference(name, contentMap['*/*']!.schema!)
+                      ]);
+
+                      clientResponseParseParams.add(bodyType);
+                    }
+
                     bodyType = _toDartType(
                         '${refer(responseClass.name!)}Content',
                         responseContent.value!.schema!);
@@ -171,7 +186,8 @@ class OpenApiLibraryGenerator {
                           .awaited);
                     } else {
                       throw StateError('''Unsupported bodyType for responses.
-${response.value!.content}
+$_typeString
+$bodyType
                           ''');
                     }
                   }

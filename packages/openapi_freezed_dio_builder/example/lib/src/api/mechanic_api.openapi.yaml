@@ -28,19 +28,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Пользователь с таким id не найден
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /users/field:
     put:
       tags:
@@ -59,19 +59,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Пользователь с таким id не найден
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Поле не изменено из-за ошибки
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /serviceAnnouncements/{id}:
     get:
       tags:
@@ -97,7 +97,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
     put:
       tags:
         - service-announcement-controller
@@ -124,19 +124,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
     delete:
       tags:
         - service-announcement-controller
@@ -155,19 +155,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /serviceAnnouncements/field:
     put:
       tags:
@@ -187,19 +187,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Поле не изменено из-за ошибки
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /partTypes/{id}:
     get:
       tags:
@@ -218,7 +218,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/PartType'
         '404':
@@ -226,13 +226,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartType'
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartType'
+                type: string
     put:
       tags:
         - part-type-controller
@@ -256,7 +256,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/PartType'
         '400':
@@ -264,19 +264,19 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartType'
+                type: string
         '404':
           description: Not Found
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartType'
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartType'
+                type: string
   /partAnnouncements:
     get:
       tags:
@@ -420,7 +420,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/PartAnnouncementEntity'
         '500':
@@ -428,7 +428,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartAnnouncementEntity'
+                type: string
     post:
       tags:
         - part-announcement-controller
@@ -445,7 +445,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/PartAnnouncementEntity'
         '500':
@@ -453,7 +453,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/PartAnnouncementEntity'
+                type: string
   /users/{id}/rating:
     get:
       tags:
@@ -481,7 +481,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
     post:
       tags:
         - user-controller
@@ -508,13 +508,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /serviceAnnouncements:
     post:
       tags:
@@ -534,13 +534,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /serviceAnnouncementsFavorites/addToFavorites:
     post:
       tags:
@@ -562,13 +562,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '400':
           description: Идентификатор сервиса не задан
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: |-
             * Сервис с таким id не найден 
@@ -576,7 +576,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /partAnnouncements/{id}/archive:
     post:
       tags:
@@ -596,13 +596,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /partAnnouncementFavorites:
     get:
       tags:
@@ -628,7 +628,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -651,13 +651,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
     delete:
       tags:
         - part-announcement-favorite-controller
@@ -676,19 +676,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /cars:
     get:
       tags:
@@ -734,13 +734,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /auth/register:
     post:
       tags:
@@ -767,13 +767,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Неверные данные
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /auth/refresh:
     post:
       tags:
@@ -806,13 +806,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Сессия с данным refresh token'ом не найдена
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /auth/confirm:
     post:
       tags:
@@ -851,13 +851,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Пользователь с таким номером не существует
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /users/{id}:
     get:
       tags:
@@ -884,7 +884,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/UserEntity'
+                type: string
     delete:
       tags:
         - user-controller
@@ -904,13 +904,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Пользователь с таким id не найден
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /users/{id}/myRating:
     get:
       tags:
@@ -931,7 +931,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /users/me:
     get:
       tags:
@@ -1132,7 +1132,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -1142,9 +1142,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PartType'
+                type: string
   /partTypes/findByName:
     get:
       tags:
@@ -1162,7 +1160,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 uniqueItems: true
                 type: array
@@ -1173,19 +1171,13 @@ paths:
           content:
             '*/*':
               schema:
-                uniqueItems: true
-                type: array
-                items:
-                  $ref: '#/components/schemas/PartType'
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                uniqueItems: true
-                type: array
-                items:
-                  $ref: '#/components/schemas/PartType'
+                type: string
   /partAnnouncements/{id}:
     get:
       tags:
@@ -1211,7 +1203,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
     delete:
       tags:
         - part-announcement-controller
@@ -1230,13 +1222,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Объявление с таким id не найдено
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /partAnnouncements/part-names:
     get:
       tags:
@@ -1269,7 +1261,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -1347,7 +1339,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 uniqueItems: true
                 type: array
@@ -1377,7 +1369,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/VinResponseDto'
+                type: string
   /api/vinDecode:
     get:
       tags:
@@ -1402,7 +1394,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /api/partTypes:
     get:
       tags:
@@ -1413,7 +1405,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -1471,7 +1463,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /api/models:
     get:
       tags:
@@ -1506,10 +1498,7 @@ paths:
           content:
             '*/*':
               schema:
-                uniqueItems: true
-                type: array
-                items:
-                  $ref: '#/components/schemas/Model'
+                type: string
   /api/makes:
     get:
       tags:
@@ -1537,10 +1526,7 @@ paths:
           content:
             '*/*':
               schema:
-                uniqueItems: true
-                type: array
-                items:
-                  $ref: '#/components/schemas/Make'
+                type: string
   /api/carTypes:
     get:
       tags:
@@ -1551,7 +1537,7 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -1601,7 +1587,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /serviceAnnouncementsFavorites/removeFromFavorites:
     delete:
       tags:
@@ -1623,13 +1609,13 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '400':
           description: Идентификатор сервиса не задан
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: |-
             * Сервис с таким id не найден 
@@ -1637,7 +1623,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /cars/{id}:
     delete:
       tags:
@@ -1657,19 +1643,19 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '404':
           description: Машина с таким id не найдена
           content:
             '*/*':
               schema:
-                type: object
+                type: string
         '500':
           description: Internal Server Error
           content:
             '*/*':
               schema:
-                type: object
+                type: string
   /auth/logout:
     delete:
       tags:
@@ -1689,7 +1675,7 @@ paths:
           content:
             '*/*':
               schema:
-                type: object
+                type: string
               
 components:
   schemas:

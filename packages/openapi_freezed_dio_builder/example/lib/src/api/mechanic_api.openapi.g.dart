@@ -682,20 +682,6 @@ Map<String, dynamic> _$_$_CarPartToJson(_$_CarPart instance) =>
       'parts': instance.parts,
     };
 
-_$_UpdateResponse _$_$_UpdateResponseFromJson(Map<String, dynamic> json) {
-  return _$_UpdateResponse();
-}
-
-Map<String, dynamic> _$_$_UpdateResponseToJson(_$_UpdateResponse instance) =>
-    <String, dynamic>{};
-
-_$_Update1Response _$_$_Update1ResponseFromJson(Map<String, dynamic> json) {
-  return _$_Update1Response();
-}
-
-Map<String, dynamic> _$_$_Update1ResponseToJson(_$_Update1Response instance) =>
-    <String, dynamic>{};
-
 _$_GetRatingByIdResponse _$_$_GetRatingByIdResponseFromJson(
     Map<String, dynamic> json) {
   return _$_GetRatingByIdResponse();
@@ -705,183 +691,11 @@ Map<String, dynamic> _$_$_GetRatingByIdResponseToJson(
         _$_GetRatingByIdResponse instance) =>
     <String, dynamic>{};
 
-_$_AddRatingRowResponse _$_$_AddRatingRowResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_AddRatingRowResponse();
-}
-
-Map<String, dynamic> _$_$_AddRatingRowResponseToJson(
-        _$_AddRatingRowResponse instance) =>
-    <String, dynamic>{};
-
-_$_DeleteByIdResponse _$_$_DeleteByIdResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_DeleteByIdResponse();
-}
-
-Map<String, dynamic> _$_$_DeleteByIdResponseToJson(
-        _$_DeleteByIdResponse instance) =>
-    <String, dynamic>{};
-
-_$_GetRatingRowResponse _$_$_GetRatingRowResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_GetRatingRowResponse();
-}
-
-Map<String, dynamic> _$_$_GetRatingRowResponseToJson(
-        _$_GetRatingRowResponse instance) =>
-    <String, dynamic>{};
-
-_$_GetById1Response _$_$_GetById1ResponseFromJson(Map<String, dynamic> json) {
-  return _$_GetById1Response();
-}
-
-Map<String, dynamic> _$_$_GetById1ResponseToJson(
-        _$_GetById1Response instance) =>
-    <String, dynamic>{};
-
-_$_Update2Response _$_$_Update2ResponseFromJson(Map<String, dynamic> json) {
-  return _$_Update2Response();
-}
-
-Map<String, dynamic> _$_$_Update2ResponseToJson(_$_Update2Response instance) =>
-    <String, dynamic>{};
-
-_$_DeleteById1Response _$_$_DeleteById1ResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_DeleteById1Response();
-}
-
-Map<String, dynamic> _$_$_DeleteById1ResponseToJson(
-        _$_DeleteById1Response instance) =>
-    <String, dynamic>{};
-
-_$_Update3Response _$_$_Update3ResponseFromJson(Map<String, dynamic> json) {
-  return _$_Update3Response();
-}
-
-Map<String, dynamic> _$_$_Update3ResponseToJson(_$_Update3Response instance) =>
-    <String, dynamic>{};
-
-_$_SaveResponse _$_$_SaveResponseFromJson(Map<String, dynamic> json) {
-  return _$_SaveResponse();
-}
-
-Map<String, dynamic> _$_$_SaveResponseToJson(_$_SaveResponse instance) =>
-    <String, dynamic>{};
-
-_$_AddToArchiveResponse _$_$_AddToArchiveResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_AddToArchiveResponse();
-}
-
-Map<String, dynamic> _$_$_AddToArchiveResponseToJson(
-        _$_AddToArchiveResponse instance) =>
-    <String, dynamic>{};
-
-_$_GetById3Response _$_$_GetById3ResponseFromJson(Map<String, dynamic> json) {
-  return _$_GetById3Response();
-}
-
-Map<String, dynamic> _$_$_GetById3ResponseToJson(
-        _$_GetById3Response instance) =>
-    <String, dynamic>{};
-
-_$_DeleteById2Response _$_$_DeleteById2ResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_DeleteById2Response();
-}
-
-Map<String, dynamic> _$_$_DeleteById2ResponseToJson(
-        _$_DeleteById2Response instance) =>
-    <String, dynamic>{};
-
-_$_AddToFavoritesResponse _$_$_AddToFavoritesResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_AddToFavoritesResponse();
-}
-
-Map<String, dynamic> _$_$_AddToFavoritesResponseToJson(
-        _$_AddToFavoritesResponse instance) =>
-    <String, dynamic>{};
-
-_$_RemoveFromFavoritesResponse _$_$_RemoveFromFavoritesResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_RemoveFromFavoritesResponse();
-}
-
-Map<String, dynamic> _$_$_RemoveFromFavoritesResponseToJson(
-        _$_RemoveFromFavoritesResponse instance) =>
-    <String, dynamic>{};
-
-_$_Save2Response _$_$_Save2ResponseFromJson(Map<String, dynamic> json) {
-  return _$_Save2Response();
-}
-
-Map<String, dynamic> _$_$_Save2ResponseToJson(_$_Save2Response instance) =>
-    <String, dynamic>{};
-
-_$_DeleteById3Response _$_$_DeleteById3ResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_DeleteById3Response();
-}
-
-Map<String, dynamic> _$_$_DeleteById3ResponseToJson(
-        _$_DeleteById3Response instance) =>
-    <String, dynamic>{};
-
-_$_Save3Response _$_$_Save3ResponseFromJson(Map<String, dynamic> json) {
-  return _$_Save3Response();
-}
-
-Map<String, dynamic> _$_$_Save3ResponseToJson(_$_Save3Response instance) =>
-    <String, dynamic>{};
-
-_$_DeleteById4Response _$_$_DeleteById4ResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_DeleteById4Response();
-}
-
-Map<String, dynamic> _$_$_DeleteById4ResponseToJson(
-        _$_DeleteById4Response instance) =>
-    <String, dynamic>{};
-
-_$_RegisterResponse _$_$_RegisterResponseFromJson(Map<String, dynamic> json) {
-  return _$_RegisterResponse();
-}
-
-Map<String, dynamic> _$_$_RegisterResponseToJson(
-        _$_RegisterResponse instance) =>
-    <String, dynamic>{};
-
 _$_RefreshResponse _$_$_RefreshResponseFromJson(Map<String, dynamic> json) {
   return _$_RefreshResponse();
 }
 
 Map<String, dynamic> _$_$_RefreshResponseToJson(_$_RefreshResponse instance) =>
-    <String, dynamic>{};
-
-_$_ConfirmResponse _$_$_ConfirmResponseFromJson(Map<String, dynamic> json) {
-  return _$_ConfirmResponse();
-}
-
-Map<String, dynamic> _$_$_ConfirmResponseToJson(_$_ConfirmResponse instance) =>
-    <String, dynamic>{};
-
-_$_LogoutResponse _$_$_LogoutResponseFromJson(Map<String, dynamic> json) {
-  return _$_LogoutResponse();
-}
-
-Map<String, dynamic> _$_$_LogoutResponseToJson(_$_LogoutResponse instance) =>
-    <String, dynamic>{};
-
-_$_VinDecodeShortResponse _$_$_VinDecodeShortResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_VinDecodeShortResponse();
-}
-
-Map<String, dynamic> _$_$_VinDecodeShortResponseToJson(
-        _$_VinDecodeShortResponse instance) =>
     <String, dynamic>{};
 
 _$_PartTypesResponse _$_$_PartTypesResponseFromJson(Map<String, dynamic> json) {
@@ -892,28 +706,10 @@ Map<String, dynamic> _$_$_PartTypesResponseToJson(
         _$_PartTypesResponse instance) =>
     <String, dynamic>{};
 
-_$_GetModificationsResponse _$_$_GetModificationsResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_GetModificationsResponse();
-}
-
-Map<String, dynamic> _$_$_GetModificationsResponseToJson(
-        _$_GetModificationsResponse instance) =>
-    <String, dynamic>{};
-
 _$_CarTypesResponse _$_$_CarTypesResponseFromJson(Map<String, dynamic> json) {
   return _$_CarTypesResponse();
 }
 
 Map<String, dynamic> _$_$_CarTypesResponseToJson(
         _$_CarTypesResponse instance) =>
-    <String, dynamic>{};
-
-_$_CarPartsListResponse _$_$_CarPartsListResponseFromJson(
-    Map<String, dynamic> json) {
-  return _$_CarPartsListResponse();
-}
-
-Map<String, dynamic> _$_$_CarPartsListResponseToJson(
-        _$_CarPartsListResponse instance) =>
     <String, dynamic>{};

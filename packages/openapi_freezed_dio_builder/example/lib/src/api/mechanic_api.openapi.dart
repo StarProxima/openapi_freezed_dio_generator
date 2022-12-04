@@ -572,51 +572,11 @@ class CarPart with _$CarPart {
 }
 
 @freezed
-class UpdateResponse with _$UpdateResponse {
-  factory UpdateResponse() = _UpdateResponse;
-
-  factory UpdateResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$UpdateResponseFromJson(jsonMap);
-}
-
-@freezed
-class Update1Response with _$Update1Response {
-  factory Update1Response() = _Update1Response;
-
-  factory Update1Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$Update1ResponseFromJson(jsonMap);
-}
-
-@freezed
 class GetRatingByIdResponse with _$GetRatingByIdResponse {
   factory GetRatingByIdResponse() = _GetRatingByIdResponse;
 
   factory GetRatingByIdResponse.fromJson(Map<String, dynamic> jsonMap) =>
       _$GetRatingByIdResponseFromJson(jsonMap);
-}
-
-@freezed
-class AddRatingRowResponse with _$AddRatingRowResponse {
-  factory AddRatingRowResponse() = _AddRatingRowResponse;
-
-  factory AddRatingRowResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$AddRatingRowResponseFromJson(jsonMap);
-}
-
-@freezed
-class DeleteByIdResponse with _$DeleteByIdResponse {
-  factory DeleteByIdResponse() = _DeleteByIdResponse;
-
-  factory DeleteByIdResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$DeleteByIdResponseFromJson(jsonMap);
-}
-
-@freezed
-class GetRatingRowResponse with _$GetRatingRowResponse {
-  factory GetRatingRowResponse() = _GetRatingRowResponse;
-
-  factory GetRatingRowResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$GetRatingRowResponseFromJson(jsonMap);
 }
 
 class UserControllerApi {
@@ -630,13 +590,13 @@ class UserControllerApi {
   /// put: /users
   ///
   /// [body]: Транспортный обьект пользователя
-  Future<Response<UpdateResponse>> update(UserDTO body) async {
+  Future<Response<String>> update(UserDTO body) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/users');
-    final response = await dio.putUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = UpdateResponse.fromJson(response.data!);
-    return Response<UpdateResponse>(
+    final response = await dio.putUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -651,13 +611,13 @@ class UserControllerApi {
   /// put: /users/field
   ///
   /// [body]: Объект для изменения одного простого поля(примитивного) у любого объекта
-  Future<Response<Update1Response>> update1(SetFieldRequest body) async {
+  Future<Response<String>> update1(SetFieldRequest body) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/users/field');
-    final response = await dio.putUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = Update1Response.fromJson(response.data!);
-    return Response<Update1Response>(
+    final response = await dio.putUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -696,16 +656,16 @@ class UserControllerApi {
   ///
   /// * [id]: Идентификатор пользователя, которому ставится оценка
   /// * [value]: Оценка
-  Future<Response<AddRatingRowResponse>> addRatingRow(
+  Future<Response<String>> addRatingRow(
       {required int id, required num value}) async {
     final queryParams = <String, dynamic>{};
     if (value != null) queryParams['value'] = value.toString();
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/users/${id}/rating');
-    final response = await dio.postUri<Map<String, dynamic>>(uri);
-    final parsed = AddRatingRowResponse.fromJson(response.data!);
-    return Response<AddRatingRowResponse>(
+    final response = await dio.postUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -741,13 +701,13 @@ class UserControllerApi {
   /// delete: /users/{id}
   ///
   /// * [id]: Идентификатор пользователя
-  Future<Response<DeleteByIdResponse>> deleteById({required int id}) async {
+  Future<Response<String>> deleteById({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/users/${id}');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = DeleteByIdResponse.fromJson(response.data!);
-    return Response<DeleteByIdResponse>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -762,14 +722,14 @@ class UserControllerApi {
   /// get: /users/{id}/myRating
   ///
   /// * [id]: Идентификатор пользователя, у которого проверяем поставлена оценка
-  Future<Response<GetRatingRowResponse>> getRatingRow({required int id}) async {
+  Future<Response<String>> getRatingRow({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/users/${id}/myRating');
-    final response = await dio.getUri<Map<String, dynamic>>(uri);
-    final parsed = GetRatingRowResponse.fromJson(response.data!);
-    return Response<GetRatingRowResponse>(
+    final response = await dio.getUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -799,46 +759,6 @@ class UserControllerApi {
       extra: response.extra,
     );
   }
-}
-
-@freezed
-class GetById1Response with _$GetById1Response {
-  factory GetById1Response() = _GetById1Response;
-
-  factory GetById1Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$GetById1ResponseFromJson(jsonMap);
-}
-
-@freezed
-class Update2Response with _$Update2Response {
-  factory Update2Response() = _Update2Response;
-
-  factory Update2Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$Update2ResponseFromJson(jsonMap);
-}
-
-@freezed
-class DeleteById1Response with _$DeleteById1Response {
-  factory DeleteById1Response() = _DeleteById1Response;
-
-  factory DeleteById1Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$DeleteById1ResponseFromJson(jsonMap);
-}
-
-@freezed
-class Update3Response with _$Update3Response {
-  factory Update3Response() = _Update3Response;
-
-  factory Update3Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$Update3ResponseFromJson(jsonMap);
-}
-
-@freezed
-class SaveResponse with _$SaveResponse {
-  factory SaveResponse() = _SaveResponse;
-
-  factory SaveResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$SaveResponseFromJson(jsonMap);
 }
 
 enum GetAllDTO {
@@ -897,15 +817,15 @@ class ServiceAnnouncementControllerApi {
   ///
   /// * [id]: Идентификатор объявления
   /// [body]: Избранное объявление о продаже
-  Future<Response<Update2Response>> update2(ServiceAnnouncementEntity body,
+  Future<Response<String>> update2(ServiceAnnouncementEntity body,
       {required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/serviceAnnouncements/${id}');
-    final response = await dio.putUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = Update2Response.fromJson(response.data!);
-    return Response<Update2Response>(
+    final response = await dio.putUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -919,14 +839,14 @@ class ServiceAnnouncementControllerApi {
   /// Удаление объявления(если текущий пользователь создавал его. Все фотки, марки и типы ТС удалятся автоматически)
   /// delete: /serviceAnnouncements/{id}
   ///
-  Future<Response<DeleteById1Response>> deleteById1({required int id}) async {
+  Future<Response<String>> deleteById1({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/serviceAnnouncements/${id}');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = DeleteById1Response.fromJson(response.data!);
-    return Response<DeleteById1Response>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -942,14 +862,14 @@ class ServiceAnnouncementControllerApi {
   /// put: /serviceAnnouncements/field
   ///
   /// [body]: Объект для изменения одного простого поля(примитивного) у любого объекта
-  Future<Response<Update3Response>> update3(SetFieldRequest body) async {
+  Future<Response<String>> update3(SetFieldRequest body) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/serviceAnnouncements/field');
-    final response = await dio.putUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = Update3Response.fromJson(response.data!);
-    return Response<Update3Response>(
+    final response = await dio.putUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -965,14 +885,14 @@ class ServiceAnnouncementControllerApi {
   /// post: /serviceAnnouncements
   ///
   /// [body]: Избранное объявление о продаже
-  Future<Response<SaveResponse>> save(ServiceAnnouncementEntity body) async {
+  Future<Response<String>> save(ServiceAnnouncementEntity body) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/serviceAnnouncements');
-    final response = await dio.postUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = SaveResponse.fromJson(response.data!);
-    return Response<SaveResponse>(
+    final response = await dio.postUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1156,30 +1076,6 @@ extension GetAllDTO2Ext on GetAllDTO2 {
   String get name => toString().substring(11);
 }
 
-@freezed
-class AddToArchiveResponse with _$AddToArchiveResponse {
-  factory AddToArchiveResponse() = _AddToArchiveResponse;
-
-  factory AddToArchiveResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$AddToArchiveResponseFromJson(jsonMap);
-}
-
-@freezed
-class GetById3Response with _$GetById3Response {
-  factory GetById3Response() = _GetById3Response;
-
-  factory GetById3Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$GetById3ResponseFromJson(jsonMap);
-}
-
-@freezed
-class DeleteById2Response with _$DeleteById2Response {
-  factory DeleteById2Response() = _DeleteById2Response;
-
-  factory DeleteById2Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$DeleteById2ResponseFromJson(jsonMap);
-}
-
 class PartAnnouncementControllerApi {
   PartAnnouncementControllerApi(this.dio, this.baseUri);
 
@@ -1314,14 +1210,14 @@ class PartAnnouncementControllerApi {
   /// Архивирование / разархивирование объявления(если текущий пользователь создавал его)
   /// post: /partAnnouncements/{id}/archive
   ///
-  Future<Response<AddToArchiveResponse>> addToArchive({required int id}) async {
+  Future<Response<String>> addToArchive({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/partAnnouncements/${id}/archive');
-    final response = await dio.postUri<Map<String, dynamic>>(uri);
-    final parsed = AddToArchiveResponse.fromJson(response.data!);
-    return Response<AddToArchiveResponse>(
+    final response = await dio.postUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1356,14 +1252,14 @@ class PartAnnouncementControllerApi {
   /// Удаление объявления(если текущий пользователь создавал его)
   /// delete: /partAnnouncements/{id}
   ///
-  Future<Response<DeleteById2Response>> deleteById2({required int id}) async {
+  Future<Response<String>> deleteById2({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/partAnnouncements/${id}');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = DeleteById2Response.fromJson(response.data!);
-    return Response<DeleteById2Response>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1436,14 +1332,6 @@ class PartAnnouncementControllerApi {
   }
 }
 
-@freezed
-class AddToFavoritesResponse with _$AddToFavoritesResponse {
-  factory AddToFavoritesResponse() = _AddToFavoritesResponse;
-
-  factory AddToFavoritesResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$AddToFavoritesResponseFromJson(jsonMap);
-}
-
 enum FindAllDTO {
   @JsonValue('STO')
   STO,
@@ -1465,14 +1353,6 @@ extension FindAllDTOExt on FindAllDTO {
   String get name => toString().substring(11);
 }
 
-@freezed
-class RemoveFromFavoritesResponse with _$RemoveFromFavoritesResponse {
-  factory RemoveFromFavoritesResponse() = _RemoveFromFavoritesResponse;
-
-  factory RemoveFromFavoritesResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$RemoveFromFavoritesResponseFromJson(jsonMap);
-}
-
 class ServiceAnnouncementFavoriteControllerApi {
   ServiceAnnouncementFavoriteControllerApi(this.dio, this.baseUri);
 
@@ -1485,17 +1365,16 @@ class ServiceAnnouncementFavoriteControllerApi {
   /// post: /serviceAnnouncementsFavorites/addToFavorites
   ///
   /// * [serviceAnnouncementId]: Идентификатор сервиса
-  Future<Response<AddToFavoritesResponse>> addToFavorites(
-      {int? serviceAnnouncementId}) async {
+  Future<Response<String>> addToFavorites({int? serviceAnnouncementId}) async {
     final queryParams = <String, dynamic>{};
     if (serviceAnnouncementId != null)
       queryParams['serviceAnnouncementId'] = serviceAnnouncementId.toString();
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/serviceAnnouncementsFavorites/addToFavorites');
-    final response = await dio.postUri<Map<String, dynamic>>(uri);
-    final parsed = AddToFavoritesResponse.fromJson(response.data!);
-    return Response<AddToFavoritesResponse>(
+    final response = await dio.postUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1542,7 +1421,7 @@ class ServiceAnnouncementFavoriteControllerApi {
   /// delete: /serviceAnnouncementsFavorites/removeFromFavorites
   ///
   /// * [serviceAnnouncementId]: Идентификатор сервиса
-  Future<Response<RemoveFromFavoritesResponse>> removeFromFavorites(
+  Future<Response<String>> removeFromFavorites(
       {int? serviceAnnouncementId}) async {
     final queryParams = <String, dynamic>{};
     if (serviceAnnouncementId != null)
@@ -1551,9 +1430,9 @@ class ServiceAnnouncementFavoriteControllerApi {
         queryParameters: queryParams,
         path: baseUri.path +
             '/serviceAnnouncementsFavorites/removeFromFavorites');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = RemoveFromFavoritesResponse.fromJson(response.data!);
-    return Response<RemoveFromFavoritesResponse>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1563,22 +1442,6 @@ class ServiceAnnouncementFavoriteControllerApi {
       extra: response.extra,
     );
   }
-}
-
-@freezed
-class Save2Response with _$Save2Response {
-  factory Save2Response() = _Save2Response;
-
-  factory Save2Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$Save2ResponseFromJson(jsonMap);
-}
-
-@freezed
-class DeleteById3Response with _$DeleteById3Response {
-  factory DeleteById3Response() = _DeleteById3Response;
-
-  factory DeleteById3Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$DeleteById3ResponseFromJson(jsonMap);
 }
 
 class PartAnnouncementFavoriteControllerApi {
@@ -1620,17 +1483,16 @@ class PartAnnouncementFavoriteControllerApi {
   /// Добавление объявления о продаже в избранное текущим пользователем(авторизованным)
   /// post: /partAnnouncementFavorites
   ///
-  Future<Response<Save2Response>> save2(
-      {required int partAnnouncementId}) async {
+  Future<Response<String>> save2({required int partAnnouncementId}) async {
     final queryParams = <String, dynamic>{};
     if (partAnnouncementId != null)
       queryParams['partAnnouncementId'] = partAnnouncementId.toString();
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/partAnnouncementFavorites');
-    final response = await dio.postUri<Map<String, dynamic>>(uri);
-    final parsed = Save2Response.fromJson(response.data!);
-    return Response<Save2Response>(
+    final response = await dio.postUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1644,7 +1506,7 @@ class PartAnnouncementFavoriteControllerApi {
   /// Удаление объявления о продаже из избранного текущим пользователем(авторизованным)
   /// delete: /partAnnouncementFavorites
   ///
-  Future<Response<DeleteById3Response>> deleteById3(
+  Future<Response<String>> deleteById3(
       {required int partAnnouncementId}) async {
     final queryParams = <String, dynamic>{};
     if (partAnnouncementId != null)
@@ -1652,9 +1514,9 @@ class PartAnnouncementFavoriteControllerApi {
     final uri = baseUri.replace(
         queryParameters: queryParams,
         path: baseUri.path + '/partAnnouncementFavorites');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = DeleteById3Response.fromJson(response.data!);
-    return Response<DeleteById3Response>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1664,22 +1526,6 @@ class PartAnnouncementFavoriteControllerApi {
       extra: response.extra,
     );
   }
-}
-
-@freezed
-class Save3Response with _$Save3Response {
-  factory Save3Response() = _Save3Response;
-
-  factory Save3Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$Save3ResponseFromJson(jsonMap);
-}
-
-@freezed
-class DeleteById4Response with _$DeleteById4Response {
-  factory DeleteById4Response() = _DeleteById4Response;
-
-  factory DeleteById4Response.fromJson(Map<String, dynamic> jsonMap) =>
-      _$DeleteById4ResponseFromJson(jsonMap);
 }
 
 class CarControllerApi {
@@ -1717,13 +1563,13 @@ class CarControllerApi {
   /// post: /cars
   ///
   /// [body]: ТС
-  Future<Response<Save3Response>> save3(CarEntity body) async {
+  Future<Response<String>> save3(CarEntity body) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/cars');
-    final response = await dio.postUri<Map<String, dynamic>>(uri, data: body);
-    final parsed = Save3Response.fromJson(response.data!);
-    return Response<Save3Response>(
+    final response = await dio.postUri<String>(uri, data: body);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1737,13 +1583,13 @@ class CarControllerApi {
   /// Удаление машины из гаража
   /// delete: /cars/{id}
   ///
-  Future<Response<DeleteById4Response>> deleteById4({required int id}) async {
+  Future<Response<String>> deleteById4({required int id}) async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/cars/${id}');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = DeleteById4Response.fromJson(response.data!);
-    return Response<DeleteById4Response>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1756,35 +1602,11 @@ class CarControllerApi {
 }
 
 @freezed
-class RegisterResponse with _$RegisterResponse {
-  factory RegisterResponse() = _RegisterResponse;
-
-  factory RegisterResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$RegisterResponseFromJson(jsonMap);
-}
-
-@freezed
 class RefreshResponse with _$RefreshResponse {
   factory RefreshResponse() = _RefreshResponse;
 
   factory RefreshResponse.fromJson(Map<String, dynamic> jsonMap) =>
       _$RefreshResponseFromJson(jsonMap);
-}
-
-@freezed
-class ConfirmResponse with _$ConfirmResponse {
-  factory ConfirmResponse() = _ConfirmResponse;
-
-  factory ConfirmResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$ConfirmResponseFromJson(jsonMap);
-}
-
-@freezed
-class LogoutResponse with _$LogoutResponse {
-  factory LogoutResponse() = _LogoutResponse;
-
-  factory LogoutResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$LogoutResponseFromJson(jsonMap);
 }
 
 class AuthControllerApi {
@@ -1800,16 +1622,16 @@ class AuthControllerApi {
   ///
   /// * [phone]: Номер телефона
   /// * [secret]: Секретный ключ
-  Future<Response<RegisterResponse>> register(
+  Future<Response<String>> register(
       {required String phone, required String secret}) async {
     final queryParams = <String, dynamic>{};
     if (phone != null) queryParams['phone'] = phone.toString();
     if (secret != null) queryParams['secret'] = secret.toString();
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/auth/register');
-    final response = await dio.postUri<Map<String, dynamic>>(uri);
-    final parsed = RegisterResponse.fromJson(response.data!);
-    return Response<RegisterResponse>(
+    final response = await dio.postUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1875,13 +1697,13 @@ class AuthControllerApi {
   /// Завершение текущей пользовательской сессии. После выполнения данного запроса текущий api_token удаляется из БД и все последующие запросы с этим токеном будут возвращать код ошибки 403 и сообщение 'Invalid token'
   /// delete: /auth/logout
   ///
-  Future<Response<LogoutResponse>> logout() async {
+  Future<Response<String>> logout() async {
     final queryParams = <String, dynamic>{};
     final uri = baseUri.replace(
         queryParameters: queryParams, path: baseUri.path + '/auth/logout');
-    final response = await dio.deleteUri<Map<String, dynamic>>(uri);
-    final parsed = LogoutResponse.fromJson(response.data!);
-    return Response<LogoutResponse>(
+    final response = await dio.deleteUri<String>(uri);
+    final parsed = response.data!;
+    return Response<String>(
       data: parsed,
       headers: response.headers,
       requestOptions: response.requestOptions,
@@ -1999,27 +1821,11 @@ class NewApiControllerApi {
 }
 
 @freezed
-class VinDecodeShortResponse with _$VinDecodeShortResponse {
-  factory VinDecodeShortResponse() = _VinDecodeShortResponse;
-
-  factory VinDecodeShortResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$VinDecodeShortResponseFromJson(jsonMap);
-}
-
-@freezed
 class PartTypesResponse with _$PartTypesResponse {
   factory PartTypesResponse() = _PartTypesResponse;
 
   factory PartTypesResponse.fromJson(Map<String, dynamic> jsonMap) =>
       _$PartTypesResponseFromJson(jsonMap);
-}
-
-@freezed
-class GetModificationsResponse with _$GetModificationsResponse {
-  factory GetModificationsResponse() = _GetModificationsResponse;
-
-  factory GetModificationsResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$GetModificationsResponseFromJson(jsonMap);
 }
 
 enum GetModifications {
@@ -2052,14 +1858,6 @@ class CarTypesResponse with _$CarTypesResponse {
 
   factory CarTypesResponse.fromJson(Map<String, dynamic> jsonMap) =>
       _$CarTypesResponseFromJson(jsonMap);
-}
-
-@freezed
-class CarPartsListResponse with _$CarPartsListResponse {
-  factory CarPartsListResponse() = _CarPartsListResponse;
-
-  factory CarPartsListResponse.fromJson(Map<String, dynamic> jsonMap) =>
-      _$CarPartsListResponseFromJson(jsonMap);
 }
 
 enum CarPartsList {
